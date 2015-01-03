@@ -1,17 +1,17 @@
 hubot-last.fm
 ---
 
-This is a Hubot plugin for keeping track of what team members are scrobbling to Last.fm.
+This is a Hubot plugin for keeping track of what team members are scrobbling to last.fm.
 
 ## Installation
 
-Install `hubot-last.fm` as a dependency of your Hubot and add `"hubot-last.fm"` to your `external-scripts.json` list. Make sure that you have a [Last.fm API key](http://www.last.fm/api/accounts) set as `HUBOT_LAST_FM_API_KEY` in your environment.
+Install `hubot-last.fm` as a dependency of your Hubot and add `"hubot-last.fm"` to your `external-scripts.json` list. Make sure that you have a [last.fm API key](http://www.last.fm/api/accounts) set as `HUBOT_LAST_FM_API_KEY` in your environment.
 
 ## Usage
 
 You can add users two ways:
 
-First (recommended), you can place a seed JSON file in `data/last-fm-users.json` with an object mapping chat names to Last.fm usernames. For example,
+First (recommended, but optional), you can place a seed JSON file in `<project root>/data/last-fm-users.json` with an object mapping chat names to last.fm usernames. For example,
 ```json
 {
     "derek": "labetephoque"
