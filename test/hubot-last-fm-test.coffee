@@ -22,6 +22,21 @@ describe 'hubot-last-fm', ->
   it 'registers five hear listeners', ->
     expect(@robot.hear).to.have.callCount(5)
 
+  it 'registers a team-wide listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/what'?s playing/i)
+
+  it 'registers a user-specific listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/what'?s (.*) (?:listening|playing)/i)
+
+  it 'registers an asker-specific listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/what am I playing/i)
+
+  it 'registers an add-user listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/add last.?fm user (.*) (.*)/i)
+
+  it 'registers an update-user listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/update last.?fm user (.*) (.*)/i)
+
   it 'attempts to load a seed user file', ->
     expect(@fs.readFile).to.have.been.calledOnce
     expect(@fs.readFile).to.have.been.calledWith('./data/last-fm-users.json')
