@@ -1,6 +1,8 @@
 hubot-last.fm
 ---
 
+[![Build Status](https://travis-ci.org/derekpeterson/hubot-last-fm.svg)](https://travis-ci.org/derekpeterson/hubot-last-fm)
+
 This is a Hubot plugin for keeping track of what team members are scrobbling to last.fm.
 
 ## Installation
