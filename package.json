@@ -14,6 +14,10 @@
   ],
   "author": "Derek Peterson <derekpetey@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/derekpeterson/hubot-last-fm"
+  },
   "dependencies": {
     "coffee-script": "^1.8.0"
   },
