@@ -1,0 +1,26 @@
+{
+  "name": "hubot-last-fm",
+  "version": "0.1.0",
+  "description": "Hubot plugin for looking up what everybody's playing on Last.fm",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "hubot",
+    "last.fm",
+    "plugin"
+  ],
+  "author": "Derek Peterson <derekpetey@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "^1.8.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "proxyquire": "^1.3.0",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
+  }
+}
