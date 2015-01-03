@@ -11,13 +11,14 @@ Install `hubot-last.fm` as a dependency of your Hubot and add `"hubot-last.fm"` 
 
 You can add users two ways:
 
-1. Place a seed JSON file in `data/last-fm-users.json` with an object mapping chat names to Last.fm usernames. For example,
+First (recommended), you can place a seed JSON file in `data/last-fm-users.json` with an object mapping chat names to Last.fm usernames. For example,
 ```json
 {
     "derek": "labetephoque"
 }
 ```
-2. Add new usernames in chat, using `add last.fm user <user name> <last.fm user name>`. Keep in mind that this is only stored in memory, though, so it will go away if you restart your Hubot.
+
+Second, add new usernames in chat, using `add last.fm user <user name> <last.fm user name>`. Keep in mind that this is only stored in memory, though, so it will go away if you restart your Hubot.
 
 ## Notes
 
