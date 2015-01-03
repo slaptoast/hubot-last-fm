@@ -1,6 +1,6 @@
 {
   "name": "hubot-last.fm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Hubot plugin for looking up what everybody's playing on Last.fm",
   "main": "index.coffee",
   "scripts": {
