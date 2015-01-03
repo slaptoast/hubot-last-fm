@@ -17,7 +17,7 @@ You can add users two ways:
     "derek": "labetephoque"
 }
 ```
-1. Add new usernames in chat, using `add last.fm user <user name> <last.fm user name>`. Keep in mind that this is only stored in memory, though, so it will go away if you restart your Hubot.
+2. Add new usernames in chat, using `add last.fm user <user name> <last.fm user name>`. Keep in mind that this is only stored in memory, though, so it will go away if you restart your Hubot.
 
 ## Notes
 
