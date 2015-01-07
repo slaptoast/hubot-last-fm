@@ -29,7 +29,7 @@ describe 'hubot-last-fm', ->
     expect(@robot.hear).to.have.been.calledWith(/what'?s (.*) (?:listening|playing)/i)
 
   it 'registers an asker-specific listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/what am I playing/i)
+    expect(@robot.hear).to.have.been.calledWith(/what am I (?:playing|listening)/i)
 
   it 'registers an add-user listener', ->
     expect(@robot.hear).to.have.been.calledWith(/add last.?fm user (.*) (.*)/i)

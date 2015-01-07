@@ -8,11 +8,11 @@
 #   HUBOT_LAST_FM_API_KEY
 #
 # Commands:
-#   what[']s playing - Gets the latest tracks for all Last.fm users in the team
-#   what[']s <user name> listening to - Gets the latest tracks for <user name>
-#   what[']s <user name> playing - Gets the latest tracks for <user name>
-#   add last[.]fm user <user name> <Last.fm name> - Adds <Last.fm name> for <user name>
-#   update last[.]fm user <user name> <Last.fm name> - Updates the Last.fm username for <user name> to be <Last.fm name>
+#   what's playing - Gets the latest tracks for all Last.fm users in the team
+#   what's <user name> listening to - Gets the latest tracks for <user name>
+#   what's <user name> playing - Gets the latest tracks for <user name>
+#   add last.fm <user name> <Last.fm name> - Adds <Last.fm name> for <user name>
+#   update last.fm <user name> <Last.fm name> - Updates the Last.fm username for <user name> to be <Last.fm name>
 #
 # Notes:
 #   Add a JSON file mapping users to Last.fm user names in `data/last-fm-users.json`
@@ -62,7 +62,7 @@ getLastTrack = (msg, usr, slackName) ->
       song = if song.length? then song[0] else song
       songStr = "\"#{song.name}\" by #{song.artist['#text']} (#{song.url})"
       time = if song['@attr']?.nowplaying then 'now' else song.date['#text']
-      msg.send "#{slackName} (#{usr}): #{songStr} (#{time})"
+      msg.send "#{slackName}: #{songStr} (#{time})"
 
 getLatest = (msg, usr, person) ->
   if usr
@@ -87,7 +87,7 @@ module.exports = (robot) ->
       return
     getLatest msg, username, person
 
-  robot.hear /what am I playing/i, (msg) ->
+  robot.hear /what am I (?:playing|listening)/i, (msg) ->
     username = userList[msg.message.user.name]
     unless username
       msg.send "You (#{msg.message.user.name}) don't have a Last.fm username set"
