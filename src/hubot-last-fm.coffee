@@ -98,7 +98,7 @@ module.exports = (robot) ->
     slackName = msg.match[1]
     lastFmName = msg.match[2]
     if userList[slackName]
-      msg.send "Use \"update last.fm user #{slackName} #{lastFmName}\" to update #{slackName}'s Last.fm name"
+      msg.send "Use \"update last.fm #{slackName} #{lastFmName}\" to update #{slackName}'s Last.fm name"
       return
     setUser msg, slackName, lastFmName
 
