@@ -61,8 +61,7 @@ getLastTrack = (msg, usr, slackName) ->
 
       song = if song.length? then song[0] else song
       songStr = "\"#{song.name}\" by #{song.artist['#text']} (#{song.url})"
-      if song['@attr']?.nowplaying
-          msg.send "#{slackName}: #{songStr}"
+      msg.send "#{slackName}: #{songStr}"
 
 getLatest = (msg, usr, person) ->
   if usr
@@ -104,3 +103,8 @@ module.exports = (robot) ->
 
   robot.hear /update last.?fm (.*) (.*)/i, (msg) ->
     setUser msg, msg.match[1], msg.match[2]
+
+  robot.hear /last.?fm roster/i, (msg) ->
+    users = for slack, last of userList
+      "#{slack}: #{last}"
+    msg.send users.join '\n'

@@ -20,7 +20,7 @@ describe 'hubot-last-fm', ->
     })(@robot)
 
   it 'registers five hear listeners', ->
-    expect(@robot.hear).to.have.callCount(5)
+    expect(@robot.hear).to.have.callCount(6)
 
   it 'registers a team-wide listener', ->
     expect(@robot.hear).to.have.been.calledWith(/what'?s playing/i)
@@ -32,10 +32,13 @@ describe 'hubot-last-fm', ->
     expect(@robot.hear).to.have.been.calledWith(/what am I (?:playing|listening)/i)
 
   it 'registers an add-user listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/add last.?fm user (.*) (.*)/i)
+    expect(@robot.hear).to.have.been.calledWith(/add last.?fm (.*) (.*)/i)
 
   it 'registers an update-user listener', ->
-    expect(@robot.hear).to.have.been.calledWith(/update last.?fm user (.*) (.*)/i)
+    expect(@robot.hear).to.have.been.calledWith(/update last.?fm (.*) (.*)/i)
+
+  it 'registers a roster listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/last.?fm roster/i)
 
   it 'attempts to load a seed user file', ->
     expect(@fs.readFile).to.have.been.calledOnce
