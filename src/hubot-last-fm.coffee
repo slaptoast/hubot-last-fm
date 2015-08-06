@@ -9,11 +9,12 @@
 #
 # Commands:
 #   what's playing - Gets the latest tracks for all Last.fm users in the team
+#   what's weekly artists
 #   what's <user name> listening to - Gets the latest tracks for <user name>
 #   what's <user name> playing - Gets the latest tracks for <user name>
 #   add last.fm <user name> <Last.fm name> - Adds <Last.fm name> for <user name>
 #   update last.fm <user name> <Last.fm name> - Updates the Last.fm username for <user name> to be <Last.fm name>
-#
+#   what's <user name> weekly artists
 # Notes:
 #   Add a JSON file mapping users to Last.fm user names in `data/last-fm-users.json`
 #
@@ -33,6 +34,39 @@ fs.readFile './data/last-fm-users.json', (err, data) ->
     console.log "[hubot-last-fm] You can provide a Last.fm user list in `data/last-fm-users.json`"
     return
   userList = JSON.parse(data)
+
+getWeeklyArtist = (msg, usr, slackName) ->
+  msg.http('http://ws.audioscrobbler.com/2.0/?')
+    .query(
+      method: 'user.getweeklyartistchart'
+      user: usr
+      api_key: API_KEY
+      format: 'json'
+      limit: 5
+    )
+    .get() (err, res, body) ->
+      if err or res.statusCode isnt 200
+        msg.send "NO MUSIC FOR YOU: #{err}"
+        return
+
+      results = JSON.parse(body)
+      if results.error
+        msg.send "Nothing for #{usr}: #{results.message}"
+        return
+
+      artists = results?.weeklyartistchart?.artist
+
+      unless artists?
+        msg.send "#{usr}: *silence*"
+        return
+
+      artistStr = for ix, artist of artists
+        "#{artist.name} [Tracks: #{artist.playcount}]"
+
+
+      msg.send "#{slackName}: #{artistStr}"
+
+
 
 getLastTrack = (msg, usr, slackName) ->
   msg.http('http://ws.audioscrobbler.com/2.0/?')
@@ -68,7 +102,14 @@ getLatest = (msg, usr, person) ->
     getLastTrack msg, usr, person
   else
     for name, user of userList
-      getLastTrack msg, user, name
+      getLastTrack msg, user, 
+
+getLatestWeekly = (msg, usr, person) ->
+  if usr
+    getWeeklyArtist msg, usr, person
+  else
+    for name, user of userList
+      getWeeklyArtist msg, user,       
 
 setUser = (msg, slackName, lastFmName) ->
   userList[slackName] = lastFmName
@@ -77,6 +118,17 @@ setUser = (msg, slackName, lastFmName) ->
 module.exports = (robot) ->
   robot.hear /what'?s playing/i, (msg) ->
     getLatest msg
+
+  robot.hear /what'?s weekly artists/i, (msg) ->
+    getLatestWeekly msg
+
+  robot.hear /what'?s (.*) (?: weekly artists)/i, (msg) ->
+    person = msg.match[1]
+    username = userList[person]
+    unless username
+      msg.send "I don't have a Last.fm username for #{person}"
+      return
+    getLatestWeekly msg, username, person
 
   robot.hear /what'?s (.*) (?:listening|playing)/i, (msg) ->
     person = msg.match[1]
