@@ -122,7 +122,7 @@ module.exports = (robot) ->
   robot.hear /what'?s weekly artists/i, (msg) ->
     getLatestWeekly msg
 
-  robot.hear /what'?s (.*) (?: weekly artists)/i, (msg) ->
+  robot.hear /what'?s (.*) (?:weekly artists)/i, (msg) ->
     person = msg.match[1]
     username = userList[person]
     unless username

@@ -19,11 +19,17 @@ describe 'hubot-last-fm', ->
       fs: @fs
     })(@robot)
 
-  it 'registers five hear listeners', ->
-    expect(@robot.hear).to.have.callCount(6)
+  it 'registers eight hear listeners', ->
+    expect(@robot.hear).to.have.callCount(8)
 
   it 'registers a team-wide listener', ->
     expect(@robot.hear).to.have.been.calledWith(/what'?s playing/i)
+
+  it 'registers a team-wide weekly artist listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/what'?s weekly artists/i)
+
+  it 'registers a user-specific artist listener', ->
+    expect(@robot.hear).to.have.been.calledWith(/what'?s (.*) (?:weekly artists)/i)
 
   it 'registers a user-specific listener', ->
     expect(@robot.hear).to.have.been.calledWith(/what'?s (.*) (?:listening|playing)/i)
